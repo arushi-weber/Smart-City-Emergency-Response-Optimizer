@@ -1,0 +1,4 @@
+Timestamp,Emergency_Type,Location_Node,Assigned_Station,Path_Distance,Response_Time_Sec
+2026-04-26 15:21:52,Fire,5,2,3,0.23
+2026-04-26 15:51:57,Fire,5,2,3,0.23
+2026-04-26 15:51:58,Fire,5,2,3,0.22
