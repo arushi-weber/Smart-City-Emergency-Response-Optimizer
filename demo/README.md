@@ -31,7 +31,7 @@ It shows locations on a map and helps users quickly identify the closest help av
 1. Open the project in Eclipse
 2. Run the Spring Boot application
 3. Open browser and go to:
-   http://localhost:8080/map.html
+   http://localhost:9099/map.html
 
 ---
 
