@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>History</title>
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+table {
+    width: 100%;   
+    margin: 0;     
+    border-collapse: collapse;
+}
+
+th {
+    background:#1e3a8a;
+    color:white;
+}
+td, th {
+    padding:10px;
+    border:1px solid #ccc;
+}
+
+canvas {
+    max-width: 80%;
+    margin: 30px auto 0 auto;
+    display: block;
+}
+#chart {
+    height: 300px !important;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="header">Emergency History</div>
+
+<div class="nav">
+    <a href="index.html">Emergency</a>
+    <a href="history.html">History</a>
+    <a href="map.html">Map</a>
+</div>
+
+<div class="container">
+    <div id="history"></div>
+    <canvas id="chart"></canvas>
+</div>
+
+<div class="footer">
+	    Emergency System | Built by Digital Damsels
+	    <span>For academic/demo purposes only</span>
+</div>
+
+<script>
+function loadHistory() {
+    fetch("/history")
+    .then(res => res.json())
+    .then(data => {
+
+        let output = "<table><tr><th>ID</th><th>Type</th><th>Location</th><th>Station</th></tr>";
+
+        let count = {Fire:0, Accident:0, Theft:0};
+
+        data.forEach(e => {
+            output += `<tr>
+                <td>${e.id}</td>
+                <td>${e.type}</td>
+                <td>${e.location}</td>
+                <td>${e.station}</td>
+            </tr>`;
+            count[e.type]++;
+        });
+
+        output += "</table>";
+        document.getElementById("history").innerHTML = output;
+
+        new Chart(document.getElementById("chart"), {
+            type: 'bar',
+            data: {
+                labels: ["Fire","Accident","Theft"],
+                datasets: [{
+                    label: "Emergencies",
+                    data: [count.Fire, count.Accident, count.Theft]
+                }]
+            }
+        });
+    });
+}
+
+loadHistory();
+</script>
+
+</body>
+</html>
